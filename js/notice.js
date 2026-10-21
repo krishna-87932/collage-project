@@ -1,14 +1,32 @@
 // ==========================================
 // ATSS CONNECT - Notice Board Script (notice.js)
 // Beginner-friendly JavaScript for College Project
+// Only Admin is allowed to publish notices
 // ==========================================
 
 // Modal Elements
 const modalOverlay = document.getElementById("note-modal-overlay");
 const xcross = document.querySelector(".x-cross");
 
-// Open Notice Modal
+// Open Notice Modal (Restricted to Admin Only)
 function createnote() {
+  const currentUser = typeof getCurrentUser === "function" ? getCurrentUser() : null;
+
+  // Check if user is logged in as Admin
+  if (!currentUser || currentUser.role !== "admin") {
+    alert("Permission Denied: Only college administrators can publish official notices.\n\nPlease log in as admin.\n(Demo Admin Credentials: admin / 123123)");
+    if (confirm("Would you like to go to the Login page now to sign in as Admin?")) {
+      window.location.href = "./login.html";
+    }
+    return;
+  }
+
+  // If Admin, pre-fill author name and open modal
+  const authorInput = document.getElementById("note-author");
+  if (authorInput) {
+    authorInput.value = `${currentUser.name} (Administrator)`;
+  }
+
   if (modalOverlay) {
     modalOverlay.style.display = "flex";
   }
@@ -30,8 +48,17 @@ if (modalOverlay) {
   });
 }
 
-// Function to Publish a New Notice
+// Function to Publish a New Notice (Admin Verification)
 function publishNotice() {
+  const currentUser = typeof getCurrentUser === "function" ? getCurrentUser() : null;
+
+  // Strict Admin Validation
+  if (!currentUser || currentUser.role !== "admin") {
+    alert("Unauthorized Action: Only college administrators can publish notices.");
+    closenote();
+    return;
+  }
+
   const headInput = document.getElementById("note-head");
   const contentInput = document.getElementById("note-content");
   const typeSelect = document.getElementById("note-type");
@@ -40,9 +67,9 @@ function publishNotice() {
   const heading = headInput ? headInput.value.trim() : "";
   const content = contentInput ? contentInput.value.trim() : "";
   const type = typeSelect ? typeSelect.value : "Academic";
-  const author = authorInput && authorInput.value.trim() !== "" ? authorInput.value.trim() : "Krishna Suryawanshi";
+  const author = authorInput && authorInput.value.trim() !== "" ? authorInput.value.trim() : `${currentUser.name} (Administrator)`;
 
-  // Simple Validation
+  // Form Field Validation
   if (heading === "") {
     alert("Please enter a notice heading.");
     if (headInput) headInput.focus();
@@ -55,7 +82,7 @@ function publishNotice() {
     return;
   }
 
-  // Format the current date and time
+  // Format current date and time
   const now = new Date();
   const timeString = "Today • " + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
@@ -104,7 +131,7 @@ function publishNotice() {
   contentInput.value = "";
   closenote();
 
-  alert("Notice published successfully!");
+  alert("Official Notice published successfully by Administrator!");
 }
 
 // Function to handle like button clicks
@@ -124,7 +151,6 @@ function toggleLike(button) {
 
 // Function to filter notices by category
 function filterCategory(category) {
-  // Update active chip UI
   const chips = document.querySelectorAll(".filter-chip");
   chips.forEach(chip => {
     chip.classList.remove("active");
@@ -164,3 +190,47 @@ function filterNotices() {
     }
   });
 }
+
+// Update Notice page UI based on Admin permissions
+function updateNoticePermissionUI() {
+  const currentUser = typeof getCurrentUser === "function" ? getCurrentUser() : null;
+  const publishBtn = document.getElementById("publish-notice-btn");
+  const bannerBox = document.getElementById("admin-status-banner");
+
+  if (!currentUser) return;
+
+  if (currentUser.role === "admin") {
+    // User is ADMIN
+    if (publishBtn) {
+      publishBtn.innerHTML = `+ Publish Notice`;
+      publishBtn.classList.remove("btn-locked");
+      publishBtn.title = "Publish a new official college notice";
+    }
+    if (bannerBox) {
+      bannerBox.className = "admin-status-banner banner-admin";
+      bannerBox.innerHTML = `
+        <span>👑 <strong>Administrator Access:</strong> You are logged in as <strong>${currentUser.name}</strong>. Notice publishing permissions are active.</span>
+        <button class="banner-switch-link" onclick="logout()">Sign Out</button>
+      `;
+    }
+  } else {
+    // User is STUDENT
+    if (publishBtn) {
+      publishBtn.innerHTML = `🔒 Publish Notice (Admin Only)`;
+      publishBtn.classList.add("btn-locked");
+      publishBtn.title = "Notice publishing is restricted to College Administrators";
+    }
+    if (bannerBox) {
+      bannerBox.className = "admin-status-banner banner-student";
+      bannerBox.innerHTML = `
+        <span>👁️ <strong>Student View:</strong> Logged in as <strong>${currentUser.name}</strong>. Official notices can only be published by Administrators.</span>
+        <a href="./login.html" class="banner-switch-link">Switch to Admin</a>
+      `;
+    }
+  }
+}
+
+// Initialize on page load
+document.addEventListener("DOMContentLoaded", function() {
+  updateNoticePermissionUI();
+});

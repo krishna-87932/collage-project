@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATSS CONNECT - Student Registration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/auth.css">
+</head>
+
+<body>
+
+  <div class="auth-container">
+    <div class="auth-brand">
+      <div class="auth-brand-mark">AC</div>
+      <div class="auth-brand-text">
+        <strong>ATSS CONNECT</strong>
+        <span>All in one place</span>
+      </div>
+    </div>
+
+    <div class="auth-header">
+      <h1>Student Registration</h1>
+      <p>Create your personal college portal account</p>
+    </div>
+
+    <!-- Alert Box for Errors or Success -->
+    <div id="auth-alert" class="auth-alert"></div>
+
+    <form class="auth-form" onsubmit="return handleRegister(event)">
+      <div class="form-group">
+        <label for="reg-name">Student Full Name</label>
+        <input type="text" id="reg-name" placeholder="e.g. Sarthak Ghadge" required>
+      </div>
+
+      <div class="form-group">
+        <label for="reg-roll">Roll Number</label>
+        <input type="text" id="reg-roll" placeholder="e.g. 57" required>
+      </div>
+
+      <div class="form-group">
+        <label for="reg-course">Department / Course</label>
+        <select id="reg-course">
+          <option value="B.Com. (Computer Applications)">B.Com. (Computer Applications)</option>
+          <option value="BCA (Computer Application)">BCA (Computer Application)</option>
+          <option value="BBA (Computer Application)">BBA (Computer Application)</option>
+          <option value="B.Sc. (Computer Science)">B.Sc. (Computer Science)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="reg-email">College Email</label>
+        <input type="email" id="reg-email" placeholder="e.g. student@atss.edu.in" required>
+      </div>
+
+      <div class="form-group">
+        <label for="reg-username">Choose Username</label>
+        <input type="text" id="reg-username" placeholder="e.g. sarthak57" required autocomplete="username">
+      </div>
+
+      <div class="form-group">
+        <label for="reg-password">Password</label>
+        <input type="password" id="reg-password" placeholder="At least 4 characters" required autocomplete="new-password">
+      </div>
+
+      <div class="form-group">
+        <label for="reg-confirm">Confirm Password</label>
+        <input type="password" id="reg-confirm" placeholder="Re-enter password" required autocomplete="new-password">
+      </div>
+
+      <button type="submit" class="btn-auth-submit">Create Student Account →</button>
+    </form>
+
+    <div class="auth-footer">
+      <span>Already registered? <a href="./login.html">Sign in here</a></span>
+      <a href="./index.html" class="back-link">← Return to College Portal</a>
+    </div>
+  </div>
+
+  <script src="./js/auth.js"></script>
+</body>
+
+</html>

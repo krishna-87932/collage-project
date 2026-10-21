@@ -492,3 +492,46 @@ div.note-display .note-form select option {
     color: #747d8c;
     font-size: 16px;
 }
+
+/* ==================== Admin Permission Banner & Locked Button ==================== */
+.btn-locked {
+    background-color: #2f3542 !important;
+    border-color: #a4b0be !important;
+    color: #f1f2f6 !important;
+    cursor: pointer;
+}
+
+.admin-status-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: 2px solid #101216;
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.banner-admin {
+    background: #d8ff4f;
+    color: #101216;
+    box-shadow: 4px 4px 0px #101216;
+}
+
+.banner-student {
+    background: #ffffff;
+    color: #2f3542;
+    box-shadow: 4px 4px 0px #101216;
+}
+
+.banner-switch-link {
+    font-size: 12px;
+    color: #101216;
+    font-weight: 700;
+    text-decoration: underline;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+}

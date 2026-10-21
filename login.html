@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATSS CONNECT - Portal Login</title>
+  <!-- Google Fonts for typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/auth.css">
+</head>
+
+<body>
+
+  <div class="auth-container">
+    <div class="auth-brand">
+      <div class="auth-brand-mark">AC</div>
+      <div class="auth-brand-text">
+        <strong>ATSS CONNECT</strong>
+        <span>All in one place</span>
+      </div>
+    </div>
+
+    <div class="auth-header">
+      <h1>Portal Login</h1>
+      <p>Sign in with your Admin or Student account</p>
+    </div>
+
+    <!-- Alert Box for Errors or Success -->
+    <div id="auth-alert" class="auth-alert"></div>
+
+    <form class="auth-form" onsubmit="return handleLogin(event)">
+      <div class="form-group">
+        <label for="login-username">Username</label>
+        <input type="text" id="login-username" placeholder="e.g. admin or krishna" required autocomplete="username">
+      </div>
+
+      <div class="form-group">
+        <label for="login-password">Password</label>
+        <input type="password" id="login-password" placeholder="Enter your password" required autocomplete="current-password">
+      </div>
+
+      <div class="form-row-remember">
+        <label>
+          <input type="checkbox" checked id="remember-me"> Keep me signed in
+        </label>
+      </div>
+
+      <button type="submit" class="btn-auth-submit">Sign In to Portal →</button>
+    </form>
+
+    <!-- Quick Demo Logins for Viva & Evaluation -->
+    <div class="demo-credentials-box">
+      <strong>⚡ Quick Demo Credentials:</strong>
+      <div class="demo-btn-group">
+        <button type="button" class="demo-fill-btn" onclick="fillDemo('admin', '123123')">
+          👑 Admin (admin / 123123)
+        </button>
+        <button type="button" class="demo-fill-btn" onclick="fillDemo('krishna', 'password')">
+          🎓 Student (krishna / password)
+        </button>
+      </div>
+    </div>
+
+    <div class="auth-footer">
+      <span>New student? <a href="./register.html">Register an account</a></span>
+      <a href="./index.html" class="back-link">← Return to College Portal</a>
+    </div>
+  </div>
+
+  <script src="./js/auth.js"></script>
+</body>
+
+</html>

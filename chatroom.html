@@ -43,17 +43,23 @@
       <button class="nav-item" data-view="profile" onclick="window.location.href='./profile.html';">
         <span>◉</span> My Profile
       </button>
+      <button class="nav-item" data-view="auth" id="sidebar-auth-link" onclick="handleAuthNav()">
+        <span>🔑</span> Switch to Admin
+      </button>
     </nav>
 
     <div class="sidebar-footer">
-      <div class="mini-user" onclick="window.location.href='./profile.html';" style="cursor: pointer;" title="View Krishna's Profile">
-        <div class="avatar">KS</div>
+      <div class="mini-user" onclick="window.location.href='./profile.html';" style="cursor: pointer;" title="View Profile">
+        <div class="avatar" id="sidebar-avatar">KS</div>
         <div>
-          <strong>Krishna</strong>
-          <span>Student • Roll 55</span>
+          <strong id="sidebar-user-name">Krishna</strong>
+          <span id="sidebar-user-role">Student • Roll 55</span>
         </div>
       </div>
-      <button class="icon-btn" title="Settings" id="settings-btn" onclick="toggleSettingsModal()">⚙</button>
+      <div style="display: flex; gap: 4px; align-items: center;">
+        <button class="icon-btn" title="Settings" id="settings-btn" onclick="toggleSettingsModal()">⚙</button>
+        <button class="icon-btn" title="Logout / Switch Account" onclick="logout()" style="font-size: 14px;">🚪</button>
+      </div>
     </div>
   </aside>
 
@@ -177,12 +183,12 @@
       </div>
       <div class="settings-body">
         <div class="setting-row">
-          <strong>Student:</strong>
-          <span>Krishna Suryawanshi (Roll No. 55)</span>
+          <strong>Active User:</strong>
+          <span id="settings-user-display">Krishna Suryawanshi</span>
         </div>
         <div class="setting-row">
-          <strong>Department:</strong>
-          <span>B.Com Computer Applications</span>
+          <strong>Account Role:</strong>
+          <span id="settings-role-display">Student</span>
         </div>
         <div class="setting-row">
           <label for="set-notif">Email Notifications</label>
@@ -193,6 +199,7 @@
           <input type="checkbox" checked id="set-sound">
         </div>
         <button class="settings-save-btn" onclick="saveSettings()">Save Preferences</button>
+        <button class="settings-save-btn" onclick="logout()" style="background: #ff7675; color: white; margin-top: 10px;">Sign Out (Logout)</button>
       </div>
     </div>
   </div>

@@ -41,7 +41,7 @@ function saveProfileData() {
   const emailVal = emailInput ? emailInput.value.trim() : "";
 
   if (nameVal === "") {
-    alert("Please enter a valid student name.");
+    alert("Please enter a valid full name.");
     return;
   }
 
@@ -67,12 +67,47 @@ function saveProfileData() {
   };
   localStorage.setItem("atss_student_profile", JSON.stringify(profileData));
 
+  // Also update session user if same
+  const currentUser = typeof getCurrentUser === "function" ? getCurrentUser() : null;
+  if (currentUser) {
+    currentUser.name = nameVal;
+    currentUser.email = emailVal;
+    localStorage.setItem("atss_current_user", JSON.stringify(currentUser));
+    if (typeof updateSidebarUser === "function") updateSidebarUser();
+  }
+
   closeEditProfileModal();
   alert("Profile updated successfully!");
 }
 
 // Load saved profile data when page opens
 document.addEventListener("DOMContentLoaded", function() {
+  const currentUser = typeof getCurrentUser === "function" ? getCurrentUser() : null;
+
+  // If Admin is logged in, show Admin profile info
+  if (currentUser && currentUser.role === "admin") {
+    const displayTitle = document.getElementById("profile-display-name");
+    const displayNameVal = document.getElementById("val-name");
+    const displayEmail = document.getElementById("val-email");
+    const displayBio = document.getElementById("val-bio");
+    const avatarLarge = document.querySelector(".profile-avatar-large");
+    const roleTag = document.querySelector(".role-tag");
+    const courseTag = document.querySelector(".course-tag");
+
+    if (displayTitle) displayTitle.textContent = currentUser.name;
+    if (displayNameVal) displayNameVal.textContent = currentUser.name;
+    if (displayEmail) displayEmail.textContent = currentUser.email;
+    if (displayBio) displayBio.textContent = "Authorized System Administrator and Faculty Coordinator for the ATSS Connect College Portal.";
+    if (avatarLarge) avatarLarge.textContent = "AD";
+    if (roleTag) {
+      roleTag.textContent = "Administrator";
+      roleTag.style.background = "#d8ff4f";
+    }
+    if (courseTag) courseTag.textContent = "Staff ID: STAFF-01 • Administration & Faculty";
+    return;
+  }
+
+  // If Student, load student profile or custom saved profile
   const saved = localStorage.getItem("atss_student_profile");
   if (saved) {
     try {
@@ -106,5 +141,13 @@ document.addEventListener("DOMContentLoaded", function() {
     } catch (e) {
       console.log("Could not parse saved profile", e);
     }
+  } else if (currentUser) {
+    // Fill from current student session
+    const displayTitle = document.getElementById("profile-display-name");
+    const displayNameVal = document.getElementById("val-name");
+    const displayEmail = document.getElementById("val-email");
+    if (displayTitle) displayTitle.textContent = currentUser.name;
+    if (displayNameVal) displayNameVal.textContent = currentUser.name;
+    if (displayEmail && currentUser.email) displayEmail.textContent = currentUser.email;
   }
 });
