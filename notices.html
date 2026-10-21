@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATSS CONNECT - College Notices</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css/notices.css">
+</head>
+
+<body>
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">AC</div>
+      <div>
+        <strong>ATSS CONNECT</strong>
+        <span>All in one place</span>
+      </div>
+    </div>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <button class="nav-item" data-view="home" onclick="window.location.href='./index.html';">
+        <img src="./icons/home.svg" alt="Home" class="icon"> Home
+      </button>
+      <button class="nav-item active" data-view="notices" onclick="window.location.href='./notices.html';">
+        <img src="./icons/notice.svg" alt="Notices" class="icon"> Notices
+      </button>
+      <button class="nav-item" data-view="lost" onclick="window.location.href='./landf.html';">
+        <img src="./icons/laf.svg" alt="Lost & Found" class="icon lost-icon"> Lost And Found
+      </button>
+      <button class="nav-item" data-view="chat" onclick="window.location.href='./chatroom.html';">
+        <img src="./icons/message.svg" alt="Chatrooms" class="icon"> Chatrooms
+      </button>
+    </nav>
+
+    <div class="sidebar-label">YOUR SPACE</div>
+    <nav class="main-nav">
+      <button class="nav-item" data-view="profile" onclick="window.location.href='./profile.html';">
+        <span>◉</span> My Profile
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="mini-user" onclick="window.location.href='./profile.html';" style="cursor: pointer;" title="View Krishna's Profile">
+        <div class="avatar">KS</div>
+        <div>
+          <strong>Krishna</strong>
+          <span>Student • Roll 55</span>
+        </div>
+      </div>
+      <button class="icon-btn" title="Settings" id="settings-btn" onclick="toggleSettingsModal()">⚙</button>
+    </div>
+  </aside>
+
+  <!-- Notice Creation Modal -->
+  <div class="modal-overlay" id="note-modal-overlay">
+    <div class="note-display">
+      <span class="x-cross" onclick="closenote()" title="Close">
+        <img src="./icons/cross.svg" alt="close" class="x-img">
+      </span>
+
+      <div class="modal-title">Publish College Notice</div>
+
+      <div class="note-form">
+        <label for="note-head">Notice Heading</label>
+        <input type="text" id="note-head" placeholder="e.g. 3rd Sem Practical Exam Schedule">
+
+        <label for="note-content">Notice Content</label>
+        <textarea id="note-content" rows="4" placeholder="Write full notice details, date, instructions..."></textarea>
+
+        <label for="note-type">Notice Category</label>
+        <select id="note-type">
+          <option value="Academic">Academic</option>
+          <option value="Important">Important</option>
+          <option value="Exam">Exam</option>
+          <option value="Event">Event</option>
+          <option value="Common">Common</option>
+        </select>
+
+        <label for="note-author">Author / Designation</label>
+        <input type="text" id="note-author" value="Krishna Suryawanshi (Student • Roll 55)">
+
+        <button type="button" class="btn pub-note" onclick="publishNotice()">+ Publish Notice</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Notice Section -->
+  <section class="notice-section">
+    <div class="top">
+      <div class="title">
+        <h1>College Notices</h1>
+        <p>Official Updates, Exam Timetables & College Announcements</p>
+      </div>
+
+      <div class="publish-notice">
+        <button class="btn" onclick="createnote()">+ Publish Notice</button>
+      </div>
+    </div>
+
+    <!-- Search and Category Filters -->
+    <div class="search-filter-bar">
+      <div class="search-box">
+        <input type="text" id="notice-search" placeholder="🔍 Search notices by title or keywords..." onkeyup="filterNotices()">
+      </div>
+      <div class="filter-chips">
+        <button class="filter-chip active" onclick="filterCategory('ALL')">All</button>
+        <button class="filter-chip" onclick="filterCategory('ACADEMIC')">Academic</button>
+        <button class="filter-chip" onclick="filterCategory('IMPORTANT')">Important</button>
+        <button class="filter-chip" onclick="filterCategory('EXAM')">Exam</button>
+        <button class="filter-chip" onclick="filterCategory('EVENT')">Event</button>
+      </div>
+    </div>
+
+    <!-- Notices Feed List -->
+    <div class="bottom">
+
+      <div class="notice-bar" data-type="EXAM">
+        <div class="type type-exam">
+          <span>EXAM</span>
+        </div>
+        <div class="content">
+          <span class="notice-title">3rd Sem Theory & Practical Paper Dates Announced</span>
+          <p>Informing all B.Com CA and BCA students: The 3rd Semester examination timetable has been officially published on the college portal. Hall tickets can be collected from the Exam Control Cell starting next Monday.</p>
+          <div class="notice-actions">
+            <button class="like-btn" onclick="toggleLike(this)">
+              ❤️ <span class="like-count">34</span>
+            </button>
+          </div>
+        </div>
+        <div class="timedate">
+          <div class="time">Today • 11:30 AM</div>
+          <div class="posted-by">
+            <span>Posted by</span>
+            <p>Exam Cell ATSS</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice-bar" data-type="IMPORTANT">
+        <div class="type type-important">
+          <span>IMPORTANT</span>
+        </div>
+        <div class="content">
+          <span class="notice-title">Mandatory College ID Card Verification</span>
+          <p>All students must carry their physical ID card at all times inside campus and laboratory premises. Entry without a valid student badge will be restricted by campus security.</p>
+          <div class="notice-actions">
+            <button class="like-btn" onclick="toggleLike(this)">
+              ❤️ <span class="like-count">21</span>
+            </button>
+          </div>
+        </div>
+        <div class="timedate">
+          <div class="time">Yesterday • 4:15 PM</div>
+          <div class="posted-by">
+            <span>Posted by</span>
+            <p>Principal Office</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice-bar" data-type="EVENT">
+        <div class="type type-event">
+          <span>EVENT</span>
+        </div>
+        <div class="content">
+          <span class="notice-title">ATSS Annual Cultural & Sports Fest 2026</span>
+          <p>The annual college week will take place from 15th to 20th November. Competitions include Cricket, Badminton, Chess, Coding Hackathon, and Cultural Night. Register your teams before Oct 30th.</p>
+          <div class="notice-actions">
+            <button class="like-btn" onclick="toggleLike(this)">
+              ❤️ <span class="like-count">58</span>
+            </button>
+          </div>
+        </div>
+        <div class="timedate">
+          <div class="time">14-10-2026 • 2:00 PM</div>
+          <div class="posted-by">
+            <span>Posted by</span>
+            <p>Sports & Cultural Club</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice-bar" data-type="ACADEMIC">
+        <div class="type">
+          <span>ACADEMIC</span>
+        </div>
+        <div class="content">
+          <span class="notice-title">Computer Applications Web Development Practical Demo</span>
+          <p>Students of B.Com CA 3rd Sem are instructed to prepare their Web Development front-end project files and live presentation for internal viva assessment scheduled this Friday in Lab 2.</p>
+          <div class="notice-actions">
+            <button class="like-btn" onclick="toggleLike(this)">
+              ❤️ <span class="like-count">19</span>
+            </button>
+          </div>
+        </div>
+        <div class="timedate">
+          <div class="time">13-10-2026 • 10:45 AM</div>
+          <div class="posted-by">
+            <span>Posted by</span>
+            <p>Prof. Sharma (HOD)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice-bar" data-type="ACADEMIC">
+        <div class="type">
+          <span>ACADEMIC</span>
+        </div>
+        <div class="content">
+          <span class="notice-title">Library Book Bank Renewal Notice</span>
+          <p>Students who borrowed semester textbook sets under the Book Bank scheme must renew their book cards by 25th October to avoid overdue fines.</p>
+          <div class="notice-actions">
+            <button class="like-btn" onclick="toggleLike(this)">
+              ❤️ <span class="like-count">12</span>
+            </button>
+          </div>
+        </div>
+        <div class="timedate">
+          <div class="time">10-10-2026 • 3:30 PM</div>
+          <div class="posted-by">
+            <span>Posted by</span>
+            <p>Chief Librarian</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="settings-modal-overlay" style="display: none;">
+    <div class="settings-modal-box">
+      <div class="settings-header">
+        <h3>Portal Settings</h3>
+        <span class="modal-close-btn" onclick="toggleSettingsModal()">&times;</span>
+      </div>
+      <div class="settings-body">
+        <div class="setting-row">
+          <strong>Student:</strong>
+          <span>Krishna Suryawanshi (Roll No. 55)</span>
+        </div>
+        <div class="setting-row">
+          <strong>Department:</strong>
+          <span>B.Com Computer Applications</span>
+        </div>
+        <div class="setting-row">
+          <label for="set-notif">Email Notifications</label>
+          <input type="checkbox" checked id="set-notif">
+        </div>
+        <div class="setting-row">
+          <label for="set-sound">Sound Alerts</label>
+          <input type="checkbox" id="set-sound">
+        </div>
+        <button class="settings-save-btn" onclick="saveSettings()">Save Preferences</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/index.js"></script>
+  <script src="./js/notice.js"></script>
+</body>
+
+</html>

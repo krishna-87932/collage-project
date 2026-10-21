@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATSS CONNECT - Lost & Found</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css/landf.css">
+</head>
+
+<body>
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">AC</div>
+      <div>
+        <strong>ATSS CONNECT</strong>
+        <span>All in one place</span>
+      </div>
+    </div>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <button class="nav-item" data-view="home" onclick="window.location.href='./index.html';">
+        <img src="./icons/home.svg" alt="Home" class="icon"> Home
+      </button>
+      <button class="nav-item" data-view="notices" onclick="window.location.href='./notices.html';">
+        <img src="./icons/notice.svg" alt="Notices" class="icon"> Notices
+      </button>
+      <button class="nav-item active" data-view="lost" onclick="window.location.href='./landf.html';">
+        <img src="./icons/laf.svg" alt="Lost & Found" class="icon lost-icon"> Lost And Found
+      </button>
+      <button class="nav-item" data-view="chat" onclick="window.location.href='./chatroom.html';">
+        <img src="./icons/message.svg" alt="Chatrooms" class="icon"> Chatrooms
+      </button>
+    </nav>
+
+    <div class="sidebar-label">YOUR SPACE</div>
+    <nav class="main-nav">
+      <button class="nav-item" data-view="profile" onclick="window.location.href='./profile.html';">
+        <span>◉</span> My Profile
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="mini-user" onclick="window.location.href='./profile.html';" style="cursor: pointer;" title="View Krishna's Profile">
+        <div class="avatar">KS</div>
+        <div>
+          <strong>Krishna</strong>
+          <span>Student • Roll 55</span>
+        </div>
+      </div>
+      <button class="icon-btn" title="Settings" id="settings-btn" onclick="toggleSettingsModal()">⚙</button>
+    </div>
+  </aside>
+
+  <!-- Report Item Modal -->
+  <div class="modal-overlay" id="laf-modal-overlay">
+    <div class="laf-modal">
+      <span class="x-cross" onclick="closeLafModal()" title="Close">
+        <img src="./icons/cross.svg" alt="close" class="x-img">
+      </span>
+
+      <div class="modal-title">Report Lost or Found Item</div>
+
+      <div class="laf-form">
+        <label>Type of Report</label>
+        <div class="status-toggle">
+          <label class="status-radio-label">
+            <input type="radio" name="laf-status" value="FOUND" checked> Found Item
+          </label>
+          <label class="status-radio-label">
+            <input type="radio" name="laf-status" value="LOST"> Lost Item
+          </label>
+        </div>
+
+        <label for="laf-title">Item Name / Title</label>
+        <input type="text" id="laf-title" placeholder="e.g. Casio fx-991EX Calculator">
+
+        <label for="laf-category">Category</label>
+        <select id="laf-category">
+          <option value="ID Card">ID Card / Documents</option>
+          <option value="Electronics">Electronics & Gadgets</option>
+          <option value="Books & Notes">Books & Notes</option>
+          <option value="Stationery">Stationery & Calculator</option>
+          <option value="Bottle & Tiffin">Water Bottle & Tiffin</option>
+          <option value="Keys & Wallet">Keys & Wallet</option>
+          <option value="Other">Other Miscellaneous</option>
+        </select>
+
+        <label for="laf-location">Campus Location</label>
+        <input type="text" id="laf-location" placeholder="e.g. Library 2nd Floor, Lab 2, Canteen">
+
+        <label for="laf-reporter">Your Name & Details</label>
+        <input type="text" id="laf-reporter" value="Krishna Suryawanshi (Roll 55)">
+
+        <label for="laf-desc">Item Description & Identifying Marks</label>
+        <textarea id="laf-desc" rows="3" placeholder="Color, brand name, sticker, condition, where it is kept..."></textarea>
+
+        <button type="button" class="submit-post-btn" onclick="submitLafItem()">+ Submit Item Report</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Lost & Found Section -->
+  <section class="laf-section">
+    <div class="top">
+      <div class="title">
+        <h1>Lost & Found</h1>
+        <p>Find what you misplaced, or report items you found on campus</p>
+      </div>
+
+      <button class="btn" onclick="openLafModal()">+ Report Item</button>
+    </div>
+
+    <!-- Search & Filter Bar -->
+    <div class="search-filter-bar">
+      <div class="search-box">
+        <input type="text" id="laf-search" placeholder="🔍 Search items by name, category, or location..." onkeyup="searchLafItems()">
+      </div>
+      <div class="filter-chips">
+        <button class="filter-chip active" data-filter="ALL" onclick="filterLafStatus('ALL')">All Items</button>
+        <button class="filter-chip" data-filter="LOST" onclick="filterLafStatus('LOST')">Lost Items</button>
+        <button class="filter-chip" data-filter="FOUND" onclick="filterLafStatus('FOUND')">Found Items</button>
+      </div>
+    </div>
+
+    <!-- Items Grid Feed -->
+    <div class="laf-grid">
+
+      <!-- Item 1: Found ID Card -->
+      <div class="laf-card" data-status="FOUND">
+        <div class="card-img-wrap">
+          <img src="./images/id-card.jpg" alt="College Student ID Card">
+          <span class="status-badge badge-found">FOUND</span>
+          <span class="category-tag">ID Card</span>
+        </div>
+        <div class="card-body">
+          <h3 class="item-title">College Student ID Card</h3>
+          <p class="item-desc">Found this student ID card lying on the reading room table on the 2nd floor of library. Please verify your PRN number and collect it.</p>
+          <div class="item-meta">
+            <div class="meta-row">
+              <span>📍 <strong>Location:</strong> Library (2nd Floor)</span>
+            </div>
+            <div class="meta-row">
+              <span>👤 <strong>Posted by:</strong> Rohan Verma (B.Com CA)</span>
+            </div>
+            <div class="meta-row">
+              <span>🕒 <strong>Posted:</strong> Today • 12:15 PM</span>
+            </div>
+          </div>
+          <button class="claim-btn" onclick="claimItem('College Student ID Card', 'Rohan Verma (Library Desk)', 'Library (2nd Floor)')">Claim This Item</button>
+        </div>
+      </div>
+
+      <!-- Item 2: Lost Calculator -->
+      <div class="laf-card" data-status="LOST">
+        <div class="card-img-wrap">
+          <div class="no-img-placeholder">🔢</div>
+          <span class="status-badge badge-lost">LOST</span>
+          <span class="category-tag">Stationery</span>
+        </div>
+        <div class="card-body">
+          <h3 class="item-title">Casio Scientific Calculator (fx-991EX)</h3>
+          <p class="item-desc">Lost my black scientific calculator during 3rd Sem practical in Computer Lab 2 on Friday. It has a small blue sticker with roll number 57 on the back.</p>
+          <div class="item-meta">
+            <div class="meta-row">
+              <span>📍 <strong>Location:</strong> Computer Lab 2</span>
+            </div>
+            <div class="meta-row">
+              <span>👤 <strong>Posted by:</strong> Sarthak Ghadge (Roll 57)</span>
+            </div>
+            <div class="meta-row">
+              <span>🕒 <strong>Posted:</strong> Yesterday • 4:30 PM</span>
+            </div>
+          </div>
+          <button class="claim-btn btn-lost" onclick="claimItem('Casio Calculator (fx-991EX)', 'Sarthak Ghadge (Roll 57)', 'Computer Lab 2')">I Found This Item</button>
+        </div>
+      </div>
+
+      <!-- Item 3: Found Water Bottle -->
+      <div class="laf-card" data-status="FOUND">
+        <div class="card-img-wrap">
+          <div class="no-img-placeholder">🍶</div>
+          <span class="status-badge badge-found">FOUND</span>
+          <span class="category-tag">Bottle</span>
+        </div>
+        <div class="card-body">
+          <h3 class="item-title">Blue Milton Stainless Steel Bottle</h3>
+          <p class="item-desc">Milton 1-Litre metallic blue insulated water bottle left near the Canteen staircase seating area during afternoon break.</p>
+          <div class="item-meta">
+            <div class="meta-row">
+              <span>📍 <strong>Location:</strong> College Canteen</span>
+            </div>
+            <div class="meta-row">
+              <span>👤 <strong>Posted by:</strong> Amit Patil (Student)</span>
+            </div>
+            <div class="meta-row">
+              <span>🕒 <strong>Posted:</strong> 2 days ago</span>
+            </div>
+          </div>
+          <button class="claim-btn" onclick="claimItem('Blue Milton Stainless Steel Bottle', 'Amit Patil / Canteen Counter', 'College Canteen')">Claim This Item</button>
+        </div>
+      </div>
+
+      <!-- Item 4: Lost Earphones -->
+      <div class="laf-card" data-status="LOST">
+        <div class="card-img-wrap">
+          <div class="no-img-placeholder">🎧</div>
+          <span class="status-badge badge-lost">LOST</span>
+          <span class="category-tag">Electronics</span>
+        </div>
+        <div class="card-body">
+          <h3 class="item-title">boAt TWS Earbuds (White Case)</h3>
+          <p class="item-desc">Misplaced white wireless earbud case near the auditorium 3rd row seats after seminar. If anyone finds it, please hand it to the college office.</p>
+          <div class="item-meta">
+            <div class="meta-row">
+              <span>📍 <strong>Location:</strong> College Auditorium</span>
+            </div>
+            <div class="meta-row">
+              <span>👤 <strong>Posted by:</strong> Krishna Suryawanshi (Roll 55)</span>
+            </div>
+            <div class="meta-row">
+              <span>🕒 <strong>Posted:</strong> 3 days ago</span>
+            </div>
+          </div>
+          <button class="claim-btn btn-lost" onclick="claimItem('boAt TWS Earbuds', 'Krishna Suryawanshi (Roll 55)', 'College Auditorium')">I Found This Item</button>
+        </div>
+      </div>
+
+      <!-- Item 5: Found Pendrive -->
+      <div class="laf-card" data-status="FOUND">
+        <div class="card-img-wrap">
+          <div class="no-img-placeholder">💾</div>
+          <span class="status-badge badge-found">FOUND</span>
+          <span class="category-tag">Electronics</span>
+        </div>
+        <div class="card-body">
+          <h3 class="item-title">SanDisk 64GB USB Pen Drive</h3>
+          <p class="item-desc">Red and black SanDisk Cruzer Blade flash drive found plugged into PC-12 in Computer Lab 1. Contains college assignment documents.</p>
+          <div class="item-meta">
+            <div class="meta-row">
+              <span>📍 <strong>Location:</strong> Computer Lab 1 (PC-12)</span>
+            </div>
+            <div class="meta-row">
+              <span>👤 <strong>Posted by:</strong> Lab Assistant</span>
+            </div>
+            <div class="meta-row">
+              <span>🕒 <strong>Posted:</strong> 4 days ago</span>
+            </div>
+          </div>
+          <button class="claim-btn" onclick="claimItem('SanDisk 64GB USB Pen Drive', 'Lab Assistant (Lab 1)', 'Computer Lab 1')">Claim This Item</button>
+        </div>
+      </div>
+
+      <!-- Item 6: Lost Notes Folder -->
+      <div class="laf-card" data-status="LOST">
+        <div class="card-img-wrap">
+          <div class="no-img-placeholder">📒</div>
+          <span class="status-badge badge-lost">LOST</span>
+          <span class="category-tag">Books & Notes</span>
+        </div>
+        <div class="card-body">
+          <h3 class="item-title">Accountancy Spiral Lecture Notes</h3>
+          <p class="item-desc">Green spiral registered notebook containing semester 3 Commerce & Financial Accountancy notes. Has name written on the first index page.</p>
+          <div class="item-meta">
+            <div class="meta-row">
+              <span>📍 <strong>Location:</strong> Classroom 204</span>
+            </div>
+            <div class="meta-row">
+              <span>👤 <strong>Posted by:</strong> Priya Sharma (B.Com)</span>
+            </div>
+            <div class="meta-row">
+              <span>🕒 <strong>Posted:</strong> 5 days ago</span>
+            </div>
+          </div>
+          <button class="claim-btn btn-lost" onclick="claimItem('Accountancy Spiral Lecture Notes', 'Priya Sharma (Room 204)', 'Classroom 204')">I Found This Item</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="settings-modal-overlay" style="display: none;">
+    <div class="settings-modal-box">
+      <div class="settings-header">
+        <h3>Portal Settings</h3>
+        <span class="modal-close-btn" onclick="toggleSettingsModal()">&times;</span>
+      </div>
+      <div class="settings-body">
+        <div class="setting-row">
+          <strong>Student:</strong>
+          <span>Krishna Suryawanshi (Roll No. 55)</span>
+        </div>
+        <div class="setting-row">
+          <strong>Department:</strong>
+          <span>B.Com Computer Applications</span>
+        </div>
+        <div class="setting-row">
+          <label for="set-notif">Email Notifications</label>
+          <input type="checkbox" checked id="set-notif">
+        </div>
+        <div class="setting-row">
+          <label for="set-sound">Sound Alerts</label>
+          <input type="checkbox" id="set-sound">
+        </div>
+        <button class="settings-save-btn" onclick="saveSettings()">Save Preferences</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/index.js"></script>
+  <script src="./js/landf.js"></script>
+</body>
+
+</html>

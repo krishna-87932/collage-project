@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATSS CONNECT - Student Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css/profile.css">
+</head>
+
+<body>
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">AC</div>
+      <div>
+        <strong>ATSS CONNECT</strong>
+        <span>All in one place</span>
+      </div>
+    </div>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <button class="nav-item" data-view="home" onclick="window.location.href='./index.html';">
+        <img src="./icons/home.svg" alt="Home" class="icon"> Home
+      </button>
+      <button class="nav-item" data-view="notices" onclick="window.location.href='./notices.html';">
+        <img src="./icons/notice.svg" alt="Notices" class="icon"> Notices
+      </button>
+      <button class="nav-item" data-view="lost" onclick="window.location.href='./landf.html';">
+        <img src="./icons/laf.svg" alt="Lost & Found" class="icon lost-icon"> Lost And Found
+      </button>
+      <button class="nav-item" data-view="chat" onclick="window.location.href='./chatroom.html';">
+        <img src="./icons/message.svg" alt="Chatrooms" class="icon"> Chatrooms
+      </button>
+    </nav>
+
+    <div class="sidebar-label">YOUR SPACE</div>
+    <nav class="main-nav">
+      <button class="nav-item active" data-view="profile" onclick="window.location.href='./profile.html';">
+        <span>◉</span> My Profile
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="mini-user" onclick="window.location.href='./profile.html';" style="cursor: pointer;" title="View Krishna's Profile">
+        <div class="avatar">KS</div>
+        <div>
+          <strong>Krishna</strong>
+          <span>Student • Roll 55</span>
+        </div>
+      </div>
+      <button class="icon-btn" title="Settings" id="settings-btn" onclick="toggleSettingsModal()">⚙</button>
+    </div>
+  </aside>
+
+  <!-- Edit Profile Modal -->
+  <div class="modal-overlay" id="profile-modal-overlay">
+    <div class="profile-modal">
+      <span class="x-cross" onclick="closeEditProfileModal()" title="Close">
+        <img src="./icons/cross.svg" alt="close" class="x-img">
+      </span>
+
+      <h2>Edit Student Profile</h2>
+
+      <div class="profile-form">
+        <label for="edit-name">Student Full Name</label>
+        <input type="text" id="edit-name" value="Krishna Suryawanshi">
+
+        <label for="edit-bio">Student Bio</label>
+        <textarea id="edit-bio" rows="3">Passionate 3rd-year B.Com CA student interested in web design, front-end development, and computer software applications. Working on ATSS Connect College Portal project.</textarea>
+
+        <label for="edit-phone">Contact Phone Number</label>
+        <input type="text" id="edit-phone" value="+91 98765 43210">
+
+        <label for="edit-email">College Email Address</label>
+        <input type="text" id="edit-email" value="krishna.suryawanshi@atss.edu.in">
+
+        <button type="button" class="save-profile-btn" onclick="saveProfileData()">Save Profile Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Profile Section -->
+  <section class="profile-section">
+
+    <!-- Hero Card -->
+    <div class="profile-hero">
+      <div class="hero-cover"></div>
+      <div class="hero-content">
+        <div class="avatar-and-info">
+          <div class="profile-avatar-large">KS</div>
+          <div class="profile-titles">
+            <h1 id="profile-display-name">Krishna Suryawanshi</h1>
+            <div class="profile-badge-row">
+              <span class="role-tag">Student</span>
+              <span class="course-tag">Roll No. 55 • B.Com. (Computer Applications)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn" onclick="openEditProfileModal()">✏️ Edit Profile</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Details Grid -->
+    <div class="profile-grid">
+
+      <!-- Academic & Personal Details Card -->
+      <div class="profile-card">
+        <h2>🎓 Academic & Personal Details</h2>
+        <div class="detail-table">
+          <div class="detail-row">
+            <span class="label">Full Name</span>
+            <span class="value" id="val-name">Krishna Suryawanshi</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Roll Number</span>
+            <span class="value">55</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Course</span>
+            <span class="value">B.Com. (Computer Applications)</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Current Semester</span>
+            <span class="value">3rd Semester</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">PRN / Student ID</span>
+            <span class="value">ATSS-2024-BCA-055</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Department</span>
+            <span class="value">Commerce & Computer Applications</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Academic Year</span>
+            <span class="value">2026 – 2027</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Project Partner</span>
+            <span class="value">Sarthak Ghadge (Roll No. 57)</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">College Email</span>
+            <span class="value" id="val-email">krishna.suryawanshi@atss.edu.in</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Contact Phone</span>
+            <span class="value" id="val-phone">+91 98765 43210</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Bio & Portal Activity -->
+      <div style="display: flex; flex-direction: column; gap: 25px;">
+
+        <!-- Bio Card -->
+        <div class="profile-card">
+          <h2>📝 About & Bio</h2>
+          <p class="bio-text" id="val-bio">
+            Passionate 3rd-year B.Com CA student interested in web design, front-end development, and computer software applications. Working on ATSS Connect College Portal project.
+          </p>
+        </div>
+
+        <!-- Activity & Stats Card -->
+        <div class="profile-card">
+          <h2>📊 Portal Contributions & Activity</h2>
+
+          <div class="stats-cards">
+            <div class="stat-box">
+              <div class="stat-num">3</div>
+              <div class="stat-desc">Notices Posted</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">2</div>
+              <div class="stat-desc">Items Reported</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">48</div>
+              <div class="stat-desc">Chat Messages</div>
+            </div>
+          </div>
+
+          <div class="activity-list">
+            <div class="activity-item">
+              <div class="activity-icon">📢</div>
+              <div class="activity-info">
+                <strong>Published Notice: Computer Applications Practical Demo</strong>
+                <span>Today • 10:45 AM</span>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon">🔍</div>
+              <div class="activity-info">
+                <strong>Reported Lost Item: boAt TWS Earbuds (White Case)</strong>
+                <span>3 days ago • College Auditorium</span>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-icon">💬</div>
+              <div class="activity-info">
+                <strong>Active participation in #bcom-ca-3rd-sem chatroom</strong>
+                <span>Yesterday • 18 messages exchanged</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="settings-modal-overlay" style="display: none;">
+    <div class="settings-modal-box">
+      <div class="settings-header">
+        <h3>Portal Settings</h3>
+        <span class="modal-close-btn" onclick="toggleSettingsModal()">&times;</span>
+      </div>
+      <div class="settings-body">
+        <div class="setting-row">
+          <strong>Student:</strong>
+          <span>Krishna Suryawanshi (Roll No. 55)</span>
+        </div>
+        <div class="setting-row">
+          <strong>Department:</strong>
+          <span>B.Com Computer Applications</span>
+        </div>
+        <div class="setting-row">
+          <label for="set-notif">Email Notifications</label>
+          <input type="checkbox" checked id="set-notif">
+        </div>
+        <div class="setting-row">
+          <label for="set-sound">Sound Alerts</label>
+          <input type="checkbox" checked id="set-sound">
+        </div>
+        <button class="settings-save-btn" onclick="saveSettings()">Save Preferences</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/index.js"></script>
+  <script src="./js/profile.js"></script>
+</body>
+
+</html>

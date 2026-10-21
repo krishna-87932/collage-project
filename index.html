@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATSS CONNECT - College Portal Dashboard</title>
+  <!-- Google Fonts for crisp typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">AC</div>
+      <div>
+        <strong>ATSS CONNECT</strong>
+        <span>All in one place</span>
+      </div>
+    </div>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <button class="nav-item active" data-view="home" onclick="window.location.href='./index.html';">
+        <img src="./icons/home.svg" alt="Home" class="icon"> Home
+      </button>
+      <button class="nav-item" data-view="notices" onclick="window.location.href='./notices.html';">
+        <img src="./icons/notice.svg" alt="Notices" class="icon"> Notices
+      </button>
+      <button class="nav-item" data-view="lost" onclick="window.location.href='./landf.html';">
+        <img src="./icons/laf.svg" alt="Lost & Found" class="icon lost-icon"> Lost And Found
+      </button>
+      <button class="nav-item" data-view="chat" onclick="window.location.href='./chatroom.html';">
+        <img src="./icons/message.svg" alt="Chatrooms" class="icon"> Chatrooms
+      </button>
+    </nav>
+
+    <div class="sidebar-label">YOUR SPACE</div>
+    <nav class="main-nav">
+      <button class="nav-item" data-view="profile" onclick="window.location.href='./profile.html';">
+        <span>◉</span> My Profile
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="mini-user" onclick="window.location.href='./profile.html';" style="cursor: pointer;" title="View Krishna's Profile">
+        <div class="avatar">KS</div>
+        <div>
+          <strong>Krishna</strong>
+          <span>Student • Roll 55</span>
+        </div>
+      </div>
+      <button class="icon-btn" title="Settings" id="settings-btn" onclick="toggleSettingsModal()">⚙</button>
+    </div>
+  </aside>
+
+  <!-- Main Content Dashboard -->
+  <div class="right-side">
+
+    <!-- Card 1: Notices Section -->
+    <div class="topics card">
+      <h1>Notices</h1>
+      <p>See Today's and Latest Notices.<br>- Stay updated with college news</p>
+      <button onclick="window.location.href='./notices.html';">Notices →</button>
+
+      <div class="notic">
+        <div class="item">
+          <div class="timedate">12-10-2026 • 4:00 PM</div>
+          <div class="notic-title">
+            <h3>3rd Sem Paper Date & Exam Schedule</h3>
+          </div>
+          <div class="notic-desc">
+            <p>Informing all students: 20 Aug 2026 is your 3rd sem Paper Date. Theory papers will start at 10:00 AM. Prepare well.<br><span>From: XYZ Teacher (HOD)</span></p>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="timedate">11-10-2026 • 11:30 AM</div>
+          <div class="notic-title">
+            <h3>Annual Sports & Cultural Week 2026</h3>
+          </div>
+          <div class="notic-desc">
+            <p>Annual Sports Meet and cultural events entries are now being accepted. Interested students can register with sports club heads.<br><span>From: Sports Committee</span></p>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="timedate">09-10-2026 • 2:15 PM</div>
+          <div class="notic-title">
+            <h3>Computer Lab Practical Submissions</h3>
+          </div>
+          <div class="notic-desc">
+            <p>All BCA and B.Com CA students are requested to complete and submit their practical project files by this coming Friday.<br><span>From: Lab Coordinator</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Lost & Found Section -->
+    <div class="topics card">
+      <h1>Lost And Found</h1>
+      <p>Find Your Lost things Here<br>Or Show What you find on campus.</p>
+      <button onclick="window.location.href='./landf.html';">Lost & Found →</button>
+
+      <div class="notic">
+        <div class="item">
+          <div class="timedate">POST AT: 12-10-2026 • 4:00 PM</div>
+          <div class="notic-title">
+            <h3>I got this ID card. Collect it from library</h3>
+          </div>
+          <div class="item-img"><img src="./images/id-card.jpg" alt="Found College ID Card"></div>
+          <div class="notic-desc">
+            <p>Found this student ID card on the reading table in library. Please verify your roll number and collect it from the counter.<br><span>From: Rohan</span></p>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="timedate">POST AT: 10-10-2026 • 1:20 PM</div>
+          <div class="notic-title">
+            <h3>Lost: Casio Scientific Calculator</h3>
+          </div>
+          <div class="notic-desc">
+            <p>Lost black Casio fx-991EX calculator in Computer Lab 2 on Friday. Has roll no sticker on backside. Kindly return if found.<br><span>From: Sarthak Ghadge (Roll 57)</span></p>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="timedate">POST AT: 08-10-2026 • 5:10 PM</div>
+          <div class="notic-title">
+            <h3>Found: Blue Steel Water Bottle</h3>
+          </div>
+          <div class="notic-desc">
+            <p>Milton stainless steel bottle found near Canteen bench after lunch hours. Handed over to security desk.<br><span>From: Amit Patil</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: ChatRooms Section -->
+    <div class="topics card">
+      <h1>ChatRoom</h1>
+      <p>CHAT WITH YOUR FRIENDS AND TEACHERS</p>
+      <button onclick="window.location.href='./chatroom.html';">ChatRoom →</button>
+
+      <div class="notic">
+        <div class="item" style="cursor: pointer;" onclick="window.location.href='./chatroom.html';">
+          <div class="timedate">🟢 # bcom-ca-3rd-sem • 18 Online</div>
+          <div class="notic-title">
+            <h3>B.Com CA 3rd Sem Room</h3>
+          </div>
+          <div class="notic-desc">
+            <p><strong>Sneha:</strong> "Did anyone note down today's web tech questions from the lab session?"<br><span>Active 2 mins ago</span></p>
+          </div>
+        </div>
+
+        <div class="item" style="cursor: pointer;" onclick="window.location.href='./chatroom.html';">
+          <div class="timedate">🟢 # general-discussion • 32 Online</div>
+          <div class="notic-title">
+            <h3>College General Discussion</h3>
+          </div>
+          <div class="notic-desc">
+            <p><strong>Rohan:</strong> "College library is open until 6:00 PM for semester revisions."<br><span>Active 15 mins ago</span></p>
+          </div>
+        </div>
+
+        <div class="item" style="cursor: pointer;" onclick="window.location.href='./chatroom.html';">
+          <div class="timedate">🟢 # coding-and-projects • 14 Online</div>
+          <div class="notic-title">
+            <h3>Tech & Project Queries</h3>
+          </div>
+          <div class="notic-desc">
+            <p><strong>Prof. Sharma:</strong> "Please test all responsive screens before submitting your project demo."<br><span>Active 45 mins ago</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Settings Modal (Beginner-friendly) -->
+  <div id="settings-modal" class="settings-modal-overlay" style="display: none;">
+    <div class="settings-modal-box">
+      <div class="settings-header">
+        <h3>Portal Settings</h3>
+        <span class="modal-close-btn" onclick="toggleSettingsModal()">&times;</span>
+      </div>
+      <div class="settings-body">
+        <div class="setting-row">
+          <strong>Student:</strong>
+          <span>Krishna Suryawanshi (Roll No. 55)</span>
+        </div>
+        <div class="setting-row">
+          <strong>Department:</strong>
+          <span>B.Com Computer Applications</span>
+        </div>
+        <div class="setting-row">
+          <label for="set-notif">Email Notifications</label>
+          <input type="checkbox" checked id="set-notif">
+        </div>
+        <div class="setting-row">
+          <label for="set-sound">Sound Alerts</label>
+          <input type="checkbox" id="set-sound">
+        </div>
+        <button class="settings-save-btn" onclick="saveSettings()">Save Preferences</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/index.js"></script>
+</body>
+
+</html>

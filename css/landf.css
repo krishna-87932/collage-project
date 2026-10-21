@@ -1,0 +1,467 @@
+/* ==========================================
+   ATSS CONNECT - Lost & Found Styles (landf.css)
+   Neobrutalist / College Theme
+   ========================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: #f5f6f8;
+    color: #17191d;
+    font-family: "DM Sans", sans-serif;
+}
+
+.laf-section {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 35px 35px;
+    box-sizing: border-box;
+}
+
+/* ==================== Top Header Section ==================== */
+.top {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0 20px;
+    border-bottom: 2px solid #e1e4e8;
+    margin-bottom: 20px;
+}
+
+.title {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title h1 {
+    font-size: 3rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0 0 6px 0;
+    color: #101216;
+    letter-spacing: -1px;
+}
+
+.title p {
+    color: #636363;
+    font-weight: 500;
+    font-size: 15px;
+    margin: 0;
+}
+
+.top .btn {
+    height: 46px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    border: 3px solid #d8ff4f;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 5px 5px black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.top .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 6px 6px black;
+}
+
+/* ==================== Search and Filter Controls ==================== */
+.search-filter-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.search-box {
+    flex: 1;
+    min-width: 260px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 2px solid #101216;
+    background: #ffffff;
+    font-size: 14px;
+    font-family: inherit;
+    box-shadow: 4px 4px 0px #101216;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.search-box input:focus {
+    border-color: #7cb903;
+}
+
+.filter-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-chip {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 2px solid #101216;
+    background: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 3px 3px 0px #101216;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.filter-chip:hover {
+    transform: translateY(-2px);
+}
+
+.filter-chip.active {
+    background: #d8ff4f;
+    color: #101216;
+}
+
+/* ==================== Items Grid ==================== */
+.laf-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+    padding-bottom: 30px;
+}
+
+.laf-card {
+    background: #ffffff;
+    border: 2px solid #101216;
+    border-radius: 12px;
+    box-shadow: 6px 6px 0px #101216;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.laf-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 8px 8px 0px #101216;
+}
+
+.card-img-wrap {
+    width: 100%;
+    height: 190px;
+    background: #eaeee6;
+    border-bottom: 2px solid #101216;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-img-wrap .no-img-placeholder {
+    font-size: 48px;
+    opacity: 0.6;
+}
+
+.status-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    border: 2px solid #101216;
+    box-shadow: 2px 2px 0px #101216;
+    text-transform: uppercase;
+}
+
+.badge-found {
+    background: #d8ff4f;
+    color: #101216;
+}
+
+.badge-lost {
+    background: #ff7675;
+    color: #ffffff;
+}
+
+.category-tag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #101216;
+    color: #ffffff;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.card-body .item-title {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 19px;
+    color: #101216;
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+}
+
+.card-body .item-desc {
+    font-size: 14px;
+    color: #4a4e58;
+    line-height: 1.5;
+    margin: 0 0 16px 0;
+    flex: 1;
+}
+
+.item-meta {
+    border-top: 1px dashed #d1d5db;
+    padding-top: 12px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 12px;
+    color: #636e72;
+}
+
+.meta-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.meta-row strong {
+    color: #2d3436;
+}
+
+.claim-btn {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #101216;
+    background: #d8ff4f;
+    color: #101216;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 3px 3px 0px #101216;
+    transition: transform 0.15s, background-color 0.2s;
+    text-align: center;
+}
+
+.claim-btn:hover {
+    transform: translateY(-2px);
+    background: #c3ec33;
+}
+
+.claim-btn.btn-lost {
+    background: #ffeaa7;
+}
+
+.claim-btn.btn-lost:hover {
+    background: #fed330;
+}
+
+/* ==================== Report Item Modal ==================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    z-index: 99;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.laf-modal {
+    position: relative;
+    width: 90%;
+    max-width: 520px;
+    max-height: 90vh;
+    box-sizing: border-box;
+    border-radius: 14px;
+    background-color: #15161a;
+    border: 1px solid #34373f;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    color: #f2f3f5;
+}
+
+.laf-modal .x-cross {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 30px;
+    height: 30px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #1f2127;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.laf-modal .x-cross:hover {
+    background: #d8ff4f;
+}
+
+.laf-modal .x-cross img {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    filter: invert(1);
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.laf-modal .x-cross:hover img {
+    filter: invert(0);
+    transform: rotate(90deg);
+}
+
+.laf-modal .modal-title {
+    color: #d8ff4f;
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+    margin: 0 0 16px 0;
+}
+
+.laf-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.laf-form label {
+    color: #9a9ea8;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-top: 6px;
+}
+
+.status-toggle {
+    display: flex;
+    gap: 12px;
+}
+
+.status-radio-label {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    border: 2px solid #34373f;
+    border-radius: 8px;
+    background: #1f2127;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+
+.status-radio-label:has(input:checked) {
+    border-color: #d8ff4f;
+    background: rgba(216, 255, 79, 0.15);
+    color: #d8ff4f;
+}
+
+.status-radio-label input {
+    accent-color: #d8ff4f;
+}
+
+.laf-form input[type="text"],
+.laf-form textarea,
+.laf-form select {
+    width: 100%;
+    padding: 11px 13px;
+    font-size: 14px;
+    font-family: inherit;
+    color: #f2f3f5;
+    background-color: #1f2127;
+    border: 1px solid #34373f;
+    border-radius: 8px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.laf-form input:focus,
+.laf-form textarea:focus,
+.laf-form select:focus {
+    border-color: #d8ff4f;
+    box-shadow: 0 0 0 3px rgba(216, 255, 79, 0.18);
+}
+
+.laf-form textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+.submit-post-btn {
+    margin-top: 15px;
+    padding: 12px;
+    background: #d8ff4f;
+    color: #101216;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 black;
+    transition: transform 0.2s;
+}
+
+.submit-post-btn:hover {
+    transform: translateY(-2px);
+}

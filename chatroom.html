@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATSS CONNECT - Student & Faculty Chatrooms</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css/chatroom.css">
+</head>
+
+<body>
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">AC</div>
+      <div>
+        <strong>ATSS CONNECT</strong>
+        <span>All in one place</span>
+      </div>
+    </div>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <button class="nav-item" data-view="home" onclick="window.location.href='./index.html';">
+        <img src="./icons/home.svg" alt="Home" class="icon"> Home
+      </button>
+      <button class="nav-item" data-view="notices" onclick="window.location.href='./notices.html';">
+        <img src="./icons/notice.svg" alt="Notices" class="icon"> Notices
+      </button>
+      <button class="nav-item" data-view="lost" onclick="window.location.href='./landf.html';">
+        <img src="./icons/laf.svg" alt="Lost & Found" class="icon lost-icon"> Lost And Found
+      </button>
+      <button class="nav-item active" data-view="chat" onclick="window.location.href='./chatroom.html';">
+        <img src="./icons/message.svg" alt="Chatrooms" class="icon"> Chatrooms
+      </button>
+    </nav>
+
+    <div class="sidebar-label">YOUR SPACE</div>
+    <nav class="main-nav">
+      <button class="nav-item" data-view="profile" onclick="window.location.href='./profile.html';">
+        <span>◉</span> My Profile
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="mini-user" onclick="window.location.href='./profile.html';" style="cursor: pointer;" title="View Krishna's Profile">
+        <div class="avatar">KS</div>
+        <div>
+          <strong>Krishna</strong>
+          <span>Student • Roll 55</span>
+        </div>
+      </div>
+      <button class="icon-btn" title="Settings" id="settings-btn" onclick="toggleSettingsModal()">⚙</button>
+    </div>
+  </aside>
+
+  <!-- Chatroom Dual-Pane Container -->
+  <div class="chatroom-layout">
+
+    <!-- Channels Sub-Sidebar -->
+    <div class="rooms-sidebar">
+      <div class="rooms-header">
+        <h2>ChatRooms</h2>
+        <span>College Discussion Hub</span>
+      </div>
+
+      <div class="rooms-list">
+        <div class="room-channel active" onclick="selectRoom(this, 'bcom-ca-3rd-sem', 'bcom-ca-3rd-sem', 'Classroom questions, notes sharing, and practical schedule queries')">
+          <div class="channel-name">
+            <span class="hash">#</span> bcom-ca-3rd-sem
+          </div>
+          <span class="unread-badge">3</span>
+        </div>
+
+        <div class="room-channel" onclick="selectRoom(this, 'general', 'general-discussion', 'Open college-wide campus announcements and community chit-chat')">
+          <div class="channel-name">
+            <span class="hash">#</span> general-discussion
+          </div>
+        </div>
+
+        <div class="room-channel" onclick="selectRoom(this, 'exam-prep', 'exam-prep-and-doubts', 'Previous year papers, doubt clearing, and revision groups')">
+          <div class="channel-name">
+            <span class="hash">#</span> exam-prep-and-doubts
+          </div>
+        </div>
+
+        <div class="room-channel" onclick="selectRoom(this, 'coding-club', 'coding-and-projects', 'Web technologies, programming projects, and laboratory discussions')">
+          <div class="channel-name">
+            <span class="hash">#</span> coding-and-projects
+          </div>
+        </div>
+
+        <div class="room-channel" onclick="selectRoom(this, 'sports-and-events', 'sports-and-events', 'Annual college fest, tournaments, cultural registrations')">
+          <div class="channel-name">
+            <span class="hash">#</span> sports-and-events
+          </div>
+        </div>
+      </div>
+
+      <!-- Online Active Members Widget -->
+      <div class="online-members-box">
+        <div class="online-title">Online Members (5)</div>
+
+        <div class="member-item">
+          <span class="member-dot"></span>
+          <span>Krishna (You)</span>
+          <span class="member-role">Roll 55</span>
+        </div>
+
+        <div class="member-item">
+          <span class="member-dot"></span>
+          <span>Prof. Sharma</span>
+          <span class="member-role" style="color: #d8ff4f;">HOD Faculty</span>
+        </div>
+
+        <div class="member-item">
+          <span class="member-dot"></span>
+          <span>Sarthak Ghadge</span>
+          <span class="member-role">Roll 57</span>
+        </div>
+
+        <div class="member-item">
+          <span class="member-dot"></span>
+          <span>Sneha Patil</span>
+          <span class="member-role">Student</span>
+        </div>
+
+        <div class="member-item">
+          <span class="member-dot"></span>
+          <span>Rohan Verma</span>
+          <span class="member-role">Student</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Chat Window Area -->
+    <div class="chat-main">
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <h2 id="active-room-title"><span class="hash">#</span> bcom-ca-3rd-sem</h2>
+          <p id="active-room-desc">Classroom questions, notes sharing, and practical schedule queries</p>
+        </div>
+        <div class="chat-header-badge">
+          <span>🟢</span> 18 Active Online
+        </div>
+      </div>
+
+      <!-- Messages Feed (Populated via chatroom.js) -->
+      <div class="chat-messages" id="chat-messages-box"></div>
+
+      <!-- Quick Reply Action Bar -->
+      <div class="quick-replies-bar">
+        <button class="quick-reply-btn" onclick="sendQuickReply('👍 Got it Sir, thank you!')">👍 Got it Sir, thank you!</button>
+        <button class="quick-reply-btn" onclick="sendQuickReply('Is the practical timing confirmed for 11 AM?')">⏰ Practical timing confirmed?</button>
+        <button class="quick-reply-btn" onclick="sendQuickReply('Can anyone share the question bank?')">📚 Share question bank?</button>
+        <button class="quick-reply-btn" onclick="sendQuickReply('Yes, all files are ready!')">✅ Files are ready!</button>
+      </div>
+
+      <!-- Chat Input Field -->
+      <div class="chat-input-bar">
+        <input type="text" id="chat-input" placeholder="Type a message in #bcom-ca-3rd-sem...">
+        <button class="send-msg-btn" onclick="sendMessage()">Send ↵</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="settings-modal-overlay" style="display: none;">
+    <div class="settings-modal-box">
+      <div class="settings-header">
+        <h3>Portal Settings</h3>
+        <span class="modal-close-btn" onclick="toggleSettingsModal()">&times;</span>
+      </div>
+      <div class="settings-body">
+        <div class="setting-row">
+          <strong>Student:</strong>
+          <span>Krishna Suryawanshi (Roll No. 55)</span>
+        </div>
+        <div class="setting-row">
+          <strong>Department:</strong>
+          <span>B.Com Computer Applications</span>
+        </div>
+        <div class="setting-row">
+          <label for="set-notif">Email Notifications</label>
+          <input type="checkbox" checked id="set-notif">
+        </div>
+        <div class="setting-row">
+          <label for="set-sound">Sound Alerts</label>
+          <input type="checkbox" checked id="set-sound">
+        </div>
+        <button class="settings-save-btn" onclick="saveSettings()">Save Preferences</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/index.js"></script>
+  <script src="./js/chatroom.js"></script>
+</body>
+
+</html>
